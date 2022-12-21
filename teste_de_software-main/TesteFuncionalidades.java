@@ -50,6 +50,7 @@ class TesteFuncionalidades {
 	
 	@Test()
 	public void ehTriangulo() {
+		assertFalse(sistema.ehTriangulo('a','a', 'a'));
         assertFalse(sistema.ehTriangulo(0, 0, 0)); // NÃO É TRIANGULO - ZERO
         assertFalse(sistema.ehTriangulo(-1, -1, -1)); // NÃO É TRIANGULO - MENOR QUE ZERO
         assertFalse(sistema.ehTriangulo(180, 180, 180)); // NÃO É TRIANGULO - EXTREMOS
@@ -68,24 +69,23 @@ class TesteFuncionalidades {
 	@Test()
 	public void classificaTriangulo() {
 		var mensagemDeErro = "sem classificação";
+		assertTrue(sistema.classificaTriangulo(90, 45, 45).contains("Retangulo"));
+        assertTrue(sistema.classificaTriangulo(70, 70, 40).contains("Acutangulo"));
+        assertTrue(sistema.classificaTriangulo(100, 40, 40).contains("Obtusângulo"));
 		assertEquals(sistema.classificaTriangulo(0, 0, 0), mensagemDeErro);
 		assertEquals(sistema.classificaTriangulo(180, 180, 180), mensagemDeErro);
 		assertEquals(sistema.classificaTriangulo(-1, -1, -1), mensagemDeErro);
 		
-		assertTrue(sistema.classificaTriangulo(90, 45, 45).contains("Retangulo"));
-        assertTrue(sistema.classificaTriangulo(70, 70, 40).contains("Acutangulo"));
-        assertTrue(sistema.classificaTriangulo(100, 40, 40).contains("Obtusângulo"));
-        
-     
-		
-		
+
+        	
 	}
 	//REQUISITO FUNCIONAL 5 - É TRIÂNGULO RETÂNGULO
 	
 	@Test()
     public void ehTrianguloRetangulo() {
-        assertFalse(sistema.ehTrianguloRetangulo(0, 0, 0));
-        assertFalse(sistema.ehTrianguloRetangulo(10, 5, 5));
+        assertFalse(sistema.ehTrianguloRetangulo(-1, -1, -1));
+		assertFalse(sistema.ehTrianguloRetangulo(0.0, 0.0, 0.0));
+        assertFalse(sistema.ehTrianguloRetangulo(10.2, 5.5, 5.2));
         assertTrue(sistema.ehTrianguloRetangulo(10, 8, 6));
 	}
 	
@@ -118,14 +118,20 @@ class TesteFuncionalidades {
 
     @Test()
     public void validacaoCalculadora() {
-        assertEquals(sistema.calculadora("bola + caixa"), "Insira uma expressão válida");
-        assertEquals(sistema.calculadora("123 + caixa"), "Insira uma expressão válida");
-        assertEquals(sistema.calculadora("caixa+123"), "Insira uma expressão válida");
-        assertEquals(sistema.calculadora("1 mais 2"), "expressão invalida, insira uma expressão correta"); //?
+    	assertEquals(sistema.calculadora("caixa - bola"), "Expressão inválida");
+    	assertEquals(sistema.calculadora("1 - 2"), "Expressão inválida");
+        assertEquals(sistema.calculadora("bola + caixa"), "Expressão inválida");
+        assertEquals(sistema.calculadora("123 + caixa"), "Expressão inválida");
+        assertEquals(sistema.calculadora("caixa+123"), "Expressão inválida");
+        assertEquals(sistema.calculadora("1 + 2"), "Expressão inválida"); //?
+        assertEquals(sistema.calculadora("bola - caixa"), "Expressão inválida");
+        assertEquals(sistema.calculadora("caixa**123"), "Expressão inválida");
+        assertEquals(sistema.calculadora("123**caixa"), "Expressão inválida");
         // Estouro matemático
         assertThrows(AssertionFailedError.class, () -> {
             assertEquals(sistema.calculadora("1000000000000000000000000 + 1"), "1000000000000000000000001.00");
         });
+        
     }
     
     //REQUISITO FUNCIONAL CALCULADORA
@@ -133,7 +139,7 @@ class TesteFuncionalidades {
     @Test()
     public void calculadora() {
     	
-        assertEquals(sistema.calculadora("1 + 1"), "2");
+        assertEquals(sistema.calculadora("1 + 1"),"2");
         assertEquals(sistema.calculadora("1 / 0"),"∞");
         assertEquals(sistema.calculadora("1 + 0"), "1.00");
         assertEquals(sistema.calculadora("1 * 0"), "0.00");
