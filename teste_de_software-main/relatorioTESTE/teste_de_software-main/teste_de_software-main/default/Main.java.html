@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TesteFuncionalidades (Dec 21, 2022 10:39:38 AM)</a> &gt; <a href="../../index.html" class="el_group">teste_de_software-main</a> &gt; <a href="../index.html" class="el_bundle">teste_de_software-main</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">import java.util.Scanner;
+
+<span class="nc" id="L3">public class Main {</span>
+    public static void main(String[] args) {
+<span class="nc" id="L5">        Sistema sistema = new Sistema();</span>
+<span class="nc" id="L6">        Scanner sc1 = new Scanner(System.in);</span>
+<span class="nc" id="L7">        Scanner sc = new Scanner(System.in);</span>
+<span class="nc" id="L8">        System.out.println(&quot;Bem vindo ao sistema&quot;);</span>
+<span class="nc" id="L9">        int option = 9999;</span>
+<span class="nc bnc" id="L10" title="All 2 branches missed.">        while (option != 13) {</span>
+<span class="nc bnc" id="L11" title="All 13 branches missed.">            switch (option) {</span>
+                case 1:
+                    try {
+<span class="nc" id="L14">                        System.out.print(&quot;Digite o nome: &quot;);</span>
+<span class="nc" id="L15">                        String nome = sc.nextLine();</span>
+<span class="nc" id="L16">                        System.out.print(&quot;Digite o email: &quot;);</span>
+<span class="nc" id="L17">                        String email = sc.nextLine();</span>
+<span class="nc" id="L18">                        System.out.print(</span>
+<span class="nc" id="L19">                                &quot;Digite a senha (mínimo 8 caracteres, 2 números(min), 1 caractere especial(min), 1 letra maiuscula(min), 1 letra minuscula(min)): &quot;);</span>
+<span class="nc" id="L20">                        String senha = sc.nextLine();</span>
+<span class="nc" id="L21">                        Usuario usuario = sistema.cadastraUsuario(nome, email, senha);</span>
+
+<span class="nc bnc" id="L23" title="All 2 branches missed.">                        System.out.println(usuario.haExcecao() ? &quot;Erro: &quot; + usuario.pegarExcecao()</span>
+<span class="nc" id="L24">                                : &quot;Cadastro realizado com sucesso!&quot;);</span>
+<span class="nc" id="L25">                    } catch (Exception e) {</span>
+<span class="nc" id="L26">                        System.out.println(&quot;Erro, valor(es) inválido(s)&quot;);</span>
+                    }
+<span class="nc" id="L28">                    break;</span>
+                case 2:
+                    try {
+<span class="nc" id="L31">                        System.out.print(&quot;Digite o a: &quot;);</span>
+<span class="nc" id="L32">                        double a = sc.nextDouble();</span>
+<span class="nc" id="L33">                        System.out.print(&quot;Digite o b: &quot;);</span>
+<span class="nc" id="L34">                        double b = sc.nextDouble();</span>
+<span class="nc" id="L35">                        System.out.print(&quot;Digite o c: &quot;);</span>
+<span class="nc" id="L36">                        double c = sc.nextDouble();</span>
+<span class="nc" id="L37">                        Raizes resultado = sistema.calculaFuncaoSegundoGrau(a, b, c);</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">                        System.out.println(resultado != null</span>
+<span class="nc" id="L39">                                ? (&quot;Os resultados são:&quot; + resultado.getEntradaA() + resultado.getEntradaB())</span>
+<span class="nc" id="L40">                                : &quot;Não foi possível encontrar os resultados&quot;);</span>
+<span class="nc" id="L41">                    } catch (Exception e) {</span>
+<span class="nc" id="L42">                        System.out.println(&quot;Erro, valor(es) inválido(s)&quot;);</span>
+                    }
+<span class="nc" id="L44">                    break;</span>
+                case 3:
+                    try {
+<span class="nc" id="L47">                        System.out.print(&quot;Digite o angulo 1&quot;);</span>
+<span class="nc" id="L48">                        double angulo1 = sc.nextDouble();</span>
+<span class="nc" id="L49">                        System.out.print(&quot;Digite o angulo 2&quot;);</span>
+<span class="nc" id="L50">                        double angulo2 = sc.nextDouble();</span>
+<span class="nc" id="L51">                        System.out.print(&quot;Digite o angulo 3&quot;);</span>
+<span class="nc" id="L52">                        double angulo3 = sc.nextDouble();</span>
+<span class="nc" id="L53">                        boolean ehtri = sistema.ehTriangulo(angulo1, angulo2, angulo3);</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">                        System.out.println(ehtri ? &quot;eh triangulho&quot; : &quot;nao eh triangulo&quot;);</span>
+<span class="nc" id="L55">                    } catch (Exception e) {</span>
+<span class="nc" id="L56">                        System.out.println(&quot;Erro, valor(es) inválido(s)&quot;);</span>
+                    }
+<span class="nc" id="L58">                    break;</span>
+                case 4:
+                    try {
+<span class="nc" id="L61">                        System.out.print(&quot;Digite o ângulo 1: &quot;);</span>
+<span class="nc" id="L62">                        double lado1 = sc.nextDouble();</span>
+<span class="nc" id="L63">                        System.out.print(&quot;Digite o ângulo 2: &quot;);</span>
+<span class="nc" id="L64">                        double lado2 = sc.nextDouble();</span>
+<span class="nc" id="L65">                        System.out.print(&quot;Digite o ângulo 3: &quot;);</span>
+<span class="nc" id="L66">                        double lado3 = sc.nextDouble();</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">                        if (sistema.ehTrianguloRetangulo(lado1, lado2, lado3)) {</span>
+<span class="nc" id="L68">                            System.out.println(&quot;ehTrianguloRetangulo&quot;);</span>
+<span class="nc" id="L69">                        } else {</span>
+<span class="nc" id="L70">                            System.out.println(&quot;Não ehTrianguloRetangulo&quot;);</span>
+                        }
+<span class="nc" id="L72">                    } catch (Exception e) {</span>
+<span class="nc" id="L73">                        System.out.println(&quot;Erro, valor(es) inválido(s)&quot;);</span>
+                    }
+<span class="nc" id="L75">                    break;</span>
+                case 5:
+                    try {
+<span class="nc" id="L78">                        System.out.print(&quot;Digite o ângulo 1: &quot;);</span>
+<span class="nc" id="L79">                        double angulo1 = sc.nextDouble();</span>
+<span class="nc" id="L80">                        System.out.print(&quot;Digite o ângulo 2: &quot;);</span>
+<span class="nc" id="L81">                        double angulo2 = sc.nextDouble();</span>
+<span class="nc" id="L82">                        System.out.print(&quot;Digite o ângulo 3: &quot;);</span>
+<span class="nc" id="L83">                        double angulo3 = sc.nextDouble();</span>
+<span class="nc" id="L84">                        String res = sistema.classificaTriangulo(angulo1, angulo2, angulo3);</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">                        System.out.println(&quot;Classificação: &quot; + res != null ? res : &quot;impossível classificar&quot;);</span>
+
+<span class="nc" id="L87">                    } catch (Exception e) {</span>
+<span class="nc" id="L88">                        System.out.println(&quot;Erro, valor(es) inválido(s)&quot;);</span>
+                    }
+<span class="nc" id="L90">                    break;</span>
+                case 6:
+                    try {
+<span class="nc" id="L93">                        System.out.print(&quot;Digite o ângulo 1: &quot;);</span>
+<span class="nc" id="L94">                        double angulo1 = sc.nextDouble();</span>
+<span class="nc" id="L95">                        System.out.print(&quot;Digite o ângulo 2: &quot;);</span>
+<span class="nc" id="L96">                        double angulo2 = sc.nextDouble();</span>
+<span class="nc" id="L97">                        System.out.print(&quot;Digite o ângulo 3: &quot;);</span>
+<span class="nc" id="L98">                        double angulo3 = sc.nextDouble();</span>
+<span class="nc" id="L99">                        System.out.print(&quot;Digite o ângulo 4: &quot;);</span>
+<span class="nc" id="L100">                        double angulo4 = sc.nextDouble();</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">                        if (sistema.ehRetangulo(angulo1, angulo2, angulo3, angulo4)) {</span>
+<span class="nc" id="L102">                            System.out.println(&quot;ehRetangulo&quot;);</span>
+<span class="nc" id="L103">                        } else {</span>
+<span class="nc" id="L104">                            System.out.println(&quot;Não ehRetangulo&quot;);</span>
+                        }
+
+<span class="nc" id="L107">                    } catch (Exception e) {</span>
+<span class="nc" id="L108">                        System.out.println(&quot;Erro, valor(es) inválido(s)&quot;);</span>
+                    }
+<span class="nc" id="L110">                    break;</span>
+                case 7:
+                    try {
+<span class="nc" id="L113">                        System.out.print(&quot;Digite o valor da base: &quot;);</span>
+<span class="nc" id="L114">                        double lado1 = sc.nextDouble();</span>
+<span class="nc" id="L115">                        System.out.print(&quot;Digite o valor da altura: &quot;);</span>
+<span class="nc" id="L116">                        double lado2 = sc.nextDouble();</span>
+<span class="nc" id="L117">                        System.out.println(&quot;O perimetro é: &quot; + sistema.perimetroRetangulo(lado1, lado2));</span>
+
+<span class="nc" id="L119">                    } catch (Exception e) {</span>
+<span class="nc" id="L120">                        System.out.println(&quot;Erro, valor(es) inválido(s)&quot;);</span>
+                    }
+<span class="nc" id="L122">                    break;</span>
+                case 8:
+                    try {
+<span class="nc" id="L125">                        System.out.print(&quot;Digite o valor da base: &quot;);</span>
+<span class="nc" id="L126">                        double lado1 = sc.nextDouble();</span>
+<span class="nc" id="L127">                        System.out.print(&quot;Digite o valor da altura: &quot;);</span>
+<span class="nc" id="L128">                        double lado2 = sc.nextDouble();</span>
+<span class="nc" id="L129">                        System.out.println(&quot;A área do retângulo é: &quot; + sistema.areaRetangulo(lado1, lado2));</span>
+<span class="nc" id="L130">                    } catch (Exception e) {</span>
+<span class="nc" id="L131">                        System.out.println(&quot;Erro, valor(es) inválido(s)&quot;);</span>
+                    }
+<span class="nc" id="L133">                    break;</span>
+                case 9:
+                    try {
+<span class="nc" id="L136">                        System.out.print(&quot;Digite a expressão: &quot;);</span>
+<span class="nc" id="L137">                        String expressão = sc.nextLine();</span>
+<span class="nc" id="L138">                        System.out.println(&quot;Resultado: &quot; + sistema.calculadora(expressão));</span>
+
+<span class="nc" id="L140">                    } catch (Exception e) {</span>
+<span class="nc" id="L141">                        System.out.println(&quot;Erro, valor(es) inválido(s)&quot;);</span>
+                    }
+<span class="nc" id="L143">                    break;</span>
+                case 10:
+                    try {
+<span class="nc" id="L146">                        System.out.print(&quot;Digite o raio: &quot;);</span>
+<span class="nc" id="L147">                        double raio = sc.nextDouble();</span>
+<span class="nc" id="L148">                        System.out.println(&quot;A área do circulo é: &quot; + sistema.areaCirculo(raio));</span>
+
+<span class="nc" id="L150">                    } catch (Exception e) {</span>
+<span class="nc" id="L151">                        System.out.println(&quot;Erro, valor(es) inválido(s)&quot;);</span>
+                    }
+<span class="nc" id="L153">                    break;</span>
+                case 11:
+                    try {
+<span class="nc" id="L156">                        System.out.print(&quot;Digite o raio: &quot;);</span>
+<span class="nc" id="L157">                        double raio = sc.nextDouble();</span>
+<span class="nc" id="L158">                        System.out.println(&quot;O perimetro: &quot; + sistema.perimetroCirculo(raio));</span>
+
+<span class="nc" id="L160">                    } catch (Exception e) {</span>
+<span class="nc" id="L161">                        System.out.println(&quot;Erro, valor(es) inválido(s)&quot;);</span>
+                    }
+<span class="nc" id="L163">                    break;</span>
+                case 12:
+                    try {
+<span class="nc" id="L166">                        System.out.print(&quot;Digite o x1: &quot;);</span>
+<span class="nc" id="L167">                        double x1 = sc.nextDouble();</span>
+<span class="nc" id="L168">                        System.out.print(&quot;Digite o y1: &quot;);</span>
+<span class="nc" id="L169">                        double y1 = sc.nextDouble();</span>
+<span class="nc" id="L170">                        System.out.print(&quot;Digite o x2: &quot;);</span>
+<span class="nc" id="L171">                        double x2 = sc.nextDouble();</span>
+<span class="nc" id="L172">                        System.out.print(&quot;Digite o y2: &quot;);</span>
+<span class="nc" id="L173">                        double y2 = sc.nextDouble();</span>
+<span class="nc" id="L174">                        System.out.println(&quot;A distância é de: &quot; + sistema.distanciaEntreDoisPontos(x1, y1, x2, y2));</span>
+
+<span class="nc" id="L176">                    } catch (Exception e) {</span>
+<span class="nc" id="L177">                        System.out.println(&quot;Erro, valor(es) inválido(s)&quot;);</span>
+                    }
+<span class="nc" id="L179">                    break;</span>
+                default:
+<span class="nc" id="L181">                    System.out.println(&quot;1 - cadastraUsuario&quot;);</span>
+<span class="nc" id="L182">                    System.out.println(&quot;2 - calculaFuncaoSegundoGrau&quot;);</span>
+<span class="nc" id="L183">                    System.out.println(&quot;3 - ehTriangulo&quot;);</span>
+<span class="nc" id="L184">                    System.out.println(&quot;4 - ehTrianguloRetangulo&quot;);</span>
+<span class="nc" id="L185">                    System.out.println(&quot;5 - classificaTriangulo&quot;);</span>
+<span class="nc" id="L186">                    System.out.println(&quot;6 - ehRetangulo&quot;);</span>
+<span class="nc" id="L187">                    System.out.println(&quot;7 - perimetroRetangulo&quot;);</span>
+<span class="nc" id="L188">                    System.out.println(&quot;8 - areaRetangulo&quot;);</span>
+<span class="nc" id="L189">                    System.out.println(&quot;9 - calculadora&quot;);</span>
+<span class="nc" id="L190">                    System.out.println(&quot;10 - areaCirculo&quot;);</span>
+<span class="nc" id="L191">                    System.out.println(&quot;11 - perimetroCirculo&quot;);</span>
+<span class="nc" id="L192">                    System.out.println(&quot;12 - distanciaEntreDoisPontos&quot;);</span>
+<span class="nc" id="L193">                    System.out.println(&quot;13 - Sair do Sistema&quot;);</span>
+                    break;
+            }
+<span class="nc" id="L196">            System.out.println();</span>
+<span class="nc" id="L197">            System.out.print(&quot;Escolha algumas das opções do sistema (14 para mostrar as opções novamente): &quot;);</span>
+<span class="nc" id="L198">            option = sc1.nextInt();</span>
+        }
+<span class="nc" id="L200">        sc1.close();</span>
+<span class="nc" id="L201">        sc.close();</span>
+<span class="nc" id="L202">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span>TesteFuncionalidades (Dec 21, 2022 10:39:38 AM)</div></body></html>

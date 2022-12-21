@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>TesteFuncionalidades.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TesteFuncionalidades (Dec 21, 2022 10:39:38 AM)</a> &gt; <a href="../../index.html" class="el_group">teste_de_software-main</a> &gt; <a href="../index.html" class="el_bundle">teste_de_software-main</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">TesteFuncionalidades.java</span></div><h1>TesteFuncionalidades.java</h1><pre class="source lang-java linenums">import static org.junit.jupiter.api.Assertions.*;
+
+import java.lang.invoke.VarHandle;
+
+import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
+
+<span class="fc" id="L8">class TesteFuncionalidades {</span>
+
+	
+<span class="fc" id="L11">	public Sistema  sistema = new Sistema();</span>
+	
+	// REQUISTO FUNCIONAL 1 - CADASTRO DE USUÁRIO
+	
+	@Test()
+	public void validaUsuario() {
+		// cadastro inválido
+<span class="nc" id="L18">		assertNull(sistema.cadastraUsuario(&quot;&quot;, &quot;&quot;, &quot;&quot;));</span>
+<span class="nc" id="L19">		assertNull(sistema.cadastraUsuario(&quot;Lucas Vieira&quot;, &quot;lllllllll&quot;, &quot;aaaaaaaaaaaaa&quot;));</span>
+<span class="nc" id="L20">		assertNull(sistema.cadastraUsuario(&quot;Lílian Honório&quot;, &quot;111111&quot;, &quot;abababababababa&quot;));</span>
+<span class="nc" id="L21">		assertNull(sistema.cadastraUsuario(&quot;Ialy Sousa&quot;, &quot;ialysousa@gmail&quot;, &quot;ndndndndnd&quot;));</span>
+		
+<span class="nc" id="L23">	}</span>
+	
+	// REQUISTO FUNCIONAL 1 - CADASTRO DE USUÁRIO
+	
+	@Test()
+	public void criacaoDoUsuario() {
+		//Cadastro válido
+<span class="fc" id="L30">		assertNotNull(sistema.cadastraUsuario(&quot;Mirna&quot;, &quot;mirna@gmail.com&quot;, &quot;abcd1234!@#$ABCD&quot;));</span>
+<span class="fc" id="L31">	}</span>
+	
+	// REQUISITO FUNCIONAL 2 - FUNÇÃO DO SEGUNDO GRAU
+	
+	@Test()
+	public void validaFuncaoSegundoGrau() {
+		// Não possui raiz
+<span class="nc" id="L38">		assertNull(sistema.calculaFuncaoSegundoGrau(1, 1, 1)); // não possui raiz</span>
+<span class="nc" id="L39">		assertNull(sistema.calculaFuncaoSegundoGrau(1, 2, 15)); // não possui raiz</span>
+<span class="nc" id="L40">		assertNull(sistema.calculaFuncaoSegundoGrau(-1, -2, -3));</span>
+<span class="nc" id="L41">	}</span>
+	
+	@Test()
+	public void funcaoSegundoGrau() {
+<span class="fc" id="L45">		var resposta = sistema.calculaFuncaoSegundoGrau(1, 2, -15);</span>
+<span class="nc" id="L46">		assertNotNull(resposta);</span>
+<span class="nc" id="L47">	}</span>
+	
+	//REQUISITO FUNCIONAL 3 - É TRIANGULO
+	
+	@Test()
+	public void ehTriangulo() {
+<span class="fc" id="L53">		assertFalse(sistema.ehTriangulo('a','a', 'a'));</span>
+<span class="fc" id="L54">        assertFalse(sistema.ehTriangulo(0, 0, 0)); // NÃO É TRIANGULO - ZERO</span>
+<span class="fc" id="L55">        assertFalse(sistema.ehTriangulo(-1, -1, -1)); // NÃO É TRIANGULO - MENOR QUE ZERO</span>
+<span class="fc" id="L56">        assertFalse(sistema.ehTriangulo(180, 180, 180)); // NÃO É TRIANGULO - EXTREMOS</span>
+        
+<span class="fc" id="L58">        assertFalse(sistema.ehTriangulo(0, 0, 180)); // NÃO É TRIANGULO </span>
+<span class="fc" id="L59">        assertFalse(sistema.ehTriangulo(180, 0, 0)); // NÃO É TRIANGULO </span>
+<span class="fc" id="L60">        assertFalse(sistema.ehTriangulo(0, 180, 0)); // NÃO É TRIANGULO </span>
+        
+<span class="fc" id="L62">        assertTrue(sistema.ehTriangulo(50, 80, 50)); // É TRIANGULO</span>
+<span class="fc" id="L63">        assertTrue(sistema.ehTriangulo(20, 10, 150)); // É TRIANGULO</span>
+<span class="fc" id="L64">        assertTrue(sistema.ehTriangulo(1, 79, 100)); // É TRIANGULO</span>
+<span class="fc" id="L65">	}</span>
+	
+	//REQUISITO FUNCIONAL 4 - CLASSIFICAÇÃO 
+	
+	@Test()
+	public void classificaTriangulo() {
+<span class="fc" id="L71">		var mensagemDeErro = &quot;sem classificação&quot;;</span>
+<span class="fc" id="L72">		assertTrue(sistema.classificaTriangulo(90, 45, 45).contains(&quot;Retangulo&quot;));</span>
+<span class="fc" id="L73">        assertTrue(sistema.classificaTriangulo(70, 70, 40).contains(&quot;Acutangulo&quot;));</span>
+<span class="fc" id="L74">        assertTrue(sistema.classificaTriangulo(100, 40, 40).contains(&quot;Obtusângulo&quot;));</span>
+<span class="nc" id="L75">		assertEquals(sistema.classificaTriangulo(0, 0, 0), mensagemDeErro);</span>
+<span class="nc" id="L76">		assertEquals(sistema.classificaTriangulo(180, 180, 180), mensagemDeErro);</span>
+<span class="nc" id="L77">		assertEquals(sistema.classificaTriangulo(-1, -1, -1), mensagemDeErro);</span>
+		
+
+        	
+<span class="nc" id="L81">	}</span>
+	//REQUISITO FUNCIONAL 5 - É TRIÂNGULO RETÂNGULO
+	
+	@Test()
+    public void ehTrianguloRetangulo() {
+<span class="fc" id="L86">        assertFalse(sistema.ehTrianguloRetangulo(-1, -1, -1));</span>
+<span class="nc" id="L87">		assertFalse(sistema.ehTrianguloRetangulo(0.0, 0.0, 0.0));</span>
+<span class="nc" id="L88">        assertFalse(sistema.ehTrianguloRetangulo(10.2, 5.5, 5.2));</span>
+<span class="nc" id="L89">        assertTrue(sistema.ehTrianguloRetangulo(10, 8, 6));</span>
+<span class="nc" id="L90">	}</span>
+	
+	
+	//REQUISITO FUNCIONAL 6 - É RETÂNGULO
+	
+	@Test()
+    public void ehRetangulo() {
+<span class="fc" id="L97">        assertTrue(sistema.ehRetangulo(90, 90, 90, 90));</span>
+<span class="fc" id="L98">        assertFalse(sistema.ehRetangulo(0, -10, 1233123123, 331293));</span>
+<span class="fc" id="L99">	}</span>
+	
+	//REQUISITO FUNCIONAL - 7 - PERÍMETRO
+	
+    @Test()
+    public void perimetroRetangulo() {
+<span class="fc" id="L105">        assertNotNull(sistema.perimetroRetangulo(200, 19));</span>
+<span class="fc" id="L106">        assertNotNull(sistema.perimetroRetangulo(-100, -10000.123));</span>
+<span class="fc" id="L107">    }</span>
+    
+    //REQUISITO FUNCIONAL - 7 - ÁREA
+
+    @Test()
+    public void areaRetangulo() {
+<span class="fc" id="L113">        assertNotNull(sistema.areaRetangulo(12, 12));</span>
+<span class="fc" id="L114">        assertNotNull(sistema.areaRetangulo(-10, -1000));</span>
+<span class="fc" id="L115">    }</span>
+    
+    //REQUISITO FUNCIONAL CALCULADORA
+
+    @Test()
+    public void validacaoCalculadora() {
+<span class="fc" id="L121">    	assertEquals(sistema.calculadora(&quot;caixa - bola&quot;), &quot;Expressão inválida&quot;);</span>
+<span class="nc" id="L122">    	assertEquals(sistema.calculadora(&quot;1 - 2&quot;), &quot;Expressão inválida&quot;);</span>
+<span class="nc" id="L123">        assertEquals(sistema.calculadora(&quot;bola + caixa&quot;), &quot;Expressão inválida&quot;);</span>
+<span class="nc" id="L124">        assertEquals(sistema.calculadora(&quot;123 + caixa&quot;), &quot;Expressão inválida&quot;);</span>
+<span class="nc" id="L125">        assertEquals(sistema.calculadora(&quot;caixa+123&quot;), &quot;Expressão inválida&quot;);</span>
+<span class="nc" id="L126">        assertEquals(sistema.calculadora(&quot;1 + 2&quot;), &quot;Expressão inválida&quot;); //?</span>
+<span class="nc" id="L127">        assertEquals(sistema.calculadora(&quot;bola - caixa&quot;), &quot;Expressão inválida&quot;);</span>
+<span class="nc" id="L128">        assertEquals(sistema.calculadora(&quot;caixa**123&quot;), &quot;Expressão inválida&quot;);</span>
+<span class="nc" id="L129">        assertEquals(sistema.calculadora(&quot;123**caixa&quot;), &quot;Expressão inválida&quot;);</span>
+        // Estouro matemático
+<span class="nc" id="L131">        assertThrows(AssertionFailedError.class, () -&gt; {</span>
+<span class="nc" id="L132">            assertEquals(sistema.calculadora(&quot;1000000000000000000000000 + 1&quot;), &quot;1000000000000000000000001.00&quot;);</span>
+<span class="nc" id="L133">        });</span>
+        
+<span class="nc" id="L135">    }</span>
+    
+    //REQUISITO FUNCIONAL CALCULADORA
+    
+    @Test()
+    public void calculadora() {
+    	
+<span class="nc" id="L142">        assertEquals(sistema.calculadora(&quot;1 + 1&quot;),&quot;2&quot;);</span>
+<span class="nc" id="L143">        assertEquals(sistema.calculadora(&quot;1 / 0&quot;),&quot;∞&quot;);</span>
+<span class="nc" id="L144">        assertEquals(sistema.calculadora(&quot;1 + 0&quot;), &quot;1.00&quot;);</span>
+<span class="nc" id="L145">        assertEquals(sistema.calculadora(&quot;1 * 0&quot;), &quot;0.00&quot;);</span>
+<span class="nc" id="L146">        assertEquals(sistema.calculadora(&quot;1 + -20&quot;), &quot;-19.00&quot;);</span>
+<span class="nc" id="L147">        assertEquals(sistema.calculadora(&quot;1 / 2&quot;), &quot;0.50&quot;);</span>
+<span class="nc" id="L148">        assertEquals(sistema.calculadora(&quot;0000000 - 2&quot;), &quot;-2.00&quot;);</span>
+<span class="nc" id="L149">        assertEquals(sistema.calculadora(&quot;0000000.1 - 0&quot;), &quot;0.10&quot;);</span>
+<span class="nc" id="L150">        assertEquals(sistema.calculadora(&quot;2 ** 2&quot;), &quot;4.00&quot;);</span>
+<span class="nc" id="L151">        assertEquals(sistema.calculadora(&quot;1000000000 - 1&quot;), &quot;999999999.00&quot;);</span>
+<span class="nc" id="L152">    }</span>
+    
+    //REQUISITO FUNCIONAL 9 - ÁREA
+    
+    @Test
+    public void areaCirculo() {
+<span class="fc" id="L158">        assertEquals(sistema.areaCirculo(10), 314.1592653589793);</span>
+<span class="fc" id="L159">        assertEquals(sistema.areaCirculo(0), 0);</span>
+<span class="fc" id="L160">    }</span>
+
+    //REQUISITO FUNCIONAL 9 - PERÍMETRO
+    
+    @Test
+    public void perimetroCirculo() {
+        // talvez truncar o resultado em menos casas decimais
+<span class="fc" id="L167">        assertEquals(sistema.perimetroCirculo(10), 62.83185307179586);</span>
+<span class="fc" id="L168">        assertEquals(sistema.perimetroCirculo(0), 0);</span>
+<span class="fc" id="L169">    }</span>
+    
+    //REQUISITO FUNCIONAL 10 - DISTÂNCIA ENTRE DOIS PONTOS
+
+    @Test
+    public void distanciaEntreDoisPontos() {
+<span class="fc" id="L175">        assertEquals(sistema.distanciaEntreDoisPontos(0, 0, 0, 10), 10);</span>
+<span class="fc" id="L176">        assertEquals(sistema.distanciaEntreDoisPontos(0, 0, 100, 0), 100);</span>
+<span class="fc" id="L177">        assertEquals(sistema.distanciaEntreDoisPontos(0, 0, 90000000, 0), 90000000);</span>
+<span class="fc" id="L178">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span>TesteFuncionalidades (Dec 21, 2022 10:39:38 AM)</div></body></html>

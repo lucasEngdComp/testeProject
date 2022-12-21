@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Sistema.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TesteFuncionalidades (Dec 21, 2022 10:39:38 AM)</a> &gt; <a href="../../index.html" class="el_group">teste_de_software-main</a> &gt; <a href="../index.html" class="el_bundle">teste_de_software-main</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Sistema.java</span></div><h1>Sistema.java</h1><pre class="source lang-java linenums">import java.util.regex.Pattern;
+
+<span class="fc" id="L3">public class Sistema implements FuncionalidadesIF {</span>
+
+  @Override
+  public Usuario cadastraUsuario(String nome, String email, String senha) {
+
+<span class="fc" id="L8">    Pattern maiusculoValidador = Pattern.compile(&quot;.*[A-Z].*&quot;);</span>
+<span class="fc" id="L9">    Pattern minusculoValidador = Pattern.compile(&quot;.*[a-z].*&quot;);</span>
+<span class="fc" id="L10">    Pattern especialValidador = Pattern.compile(&quot;.*[^a-zA-Z 0-9].*&quot;);</span>
+<span class="fc" id="L11">    Pattern emailValidador = Pattern.compile(&quot;^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$&quot;, Pattern.CASE_INSENSITIVE);</span>
+
+<span class="fc" id="L13">    Usuario usuario = new Usuario();</span>
+
+<span class="pc bpc" id="L15" title="1 of 2 branches missed.">    if (senha != null</span>
+<span class="fc bfc" id="L16" title="All 2 branches covered.">        &amp;&amp; senha.length() &gt;= 8</span>
+<span class="pc bpc" id="L17" title="1 of 2 branches missed.">        &amp;&amp; minusculoValidador.matcher(senha).matches()</span>
+<span class="pc bpc" id="L18" title="1 of 2 branches missed.">        &amp;&amp; maiusculoValidador.matcher(senha).matches()</span>
+<span class="pc bpc" id="L19" title="1 of 2 branches missed.">        &amp;&amp; especialValidador.matcher(senha).matches()) {</span>
+<span class="fc" id="L20">      boolean doisNumeros = false;</span>
+<span class="fc" id="L21">      int numeroDeNumeros = 0;</span>
+
+<span class="fc bfc" id="L23" title="All 2 branches covered.">      for (int i = 0; i &lt; senha.length(); i++) {</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (Character.isDigit(senha.charAt(i))) {</span>
+<span class="fc" id="L25">          numeroDeNumeros++;</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">          if (numeroDeNumeros &gt; 2) {</span>
+<span class="fc" id="L27">            doisNumeros = true;</span>
+          }
+        }
+      }
+
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">      if (doisNumeros) {</span>
+<span class="fc" id="L33">        usuario.setSenha(senha);</span>
+      }
+    }
+
+<span class="pc bpc" id="L37" title="1 of 4 branches missed.">    if (nome != null &amp;&amp; !nome.isEmpty()) {</span>
+<span class="fc" id="L38">      usuario.setNome(nome);</span>
+    }
+
+<span class="pc bpc" id="L41" title="2 of 6 branches missed.">    if (email != null &amp;&amp; !email.isEmpty() &amp;&amp; emailValidador.matcher(email).matches()) {</span>
+<span class="fc" id="L42">      usuario.setEmail(email);</span>
+    }
+
+<span class="fc" id="L45">    return usuario;</span>
+  }
+
+  @Override
+  public Raizes calculaFuncaoSegundoGrau(double a, double b, double c) {
+    double delta;
+    double x1;
+    double x2;
+
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">    if (a != 0) {</span>
+
+<span class="fc" id="L56">      delta = b * b * 4 * a * c;</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">      if (delta &gt;= 0) {</span>
+<span class="fc" id="L58">        x1 = (int) ((-b + (Math.sqrt(delta))) / (2 * a));</span>
+<span class="fc" id="L59">        x2 = (int) ((-b + (Math.sqrt(delta))) / (2 * a));</span>
+<span class="fc" id="L60">        return new Raizes(x1, x2);</span>
+      }
+    }
+
+<span class="fc" id="L64">    return null;</span>
+  }
+
+  @Override
+  public boolean ehRetangulo(double angulo1, double angulo2, double angulo3, double angulo4) {
+<span class="pc bpc" id="L69" title="2 of 6 branches missed.">    boolean iguais = (angulo1 == angulo2) &amp;&amp; (angulo2 == angulo3) &amp;&amp; (angulo3 == angulo4);</span>
+<span class="pc bpc" id="L70" title="3 of 8 branches missed.">    boolean noventaGraus = (angulo1 == 90) &amp;&amp; (angulo2 == 90) &amp;&amp; (angulo3 == 90) &amp;&amp; (angulo4 == 90);</span>
+
+<span class="fc bfc" id="L72" title="All 2 branches covered.">    if (!iguais)</span>
+<span class="fc" id="L73">      return false;</span>
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">    if (!noventaGraus)</span>
+<span class="nc" id="L75">      return false;</span>
+
+<span class="fc" id="L77">    return true;</span>
+  }
+
+  @Override
+  public boolean ehTriangulo(double angulo1, double angulo2, double angulo3) {
+
+<span class="pc bpc" id="L83" title="1 of 6 branches missed.">    if (angulo1 &lt;= 0 || angulo2 &lt;= 0 || angulo2 &lt;= 0)</span>
+<span class="fc" id="L84">      return false;</span>
+
+<span class="fc bfc" id="L86" title="All 2 branches covered.">    if ((angulo1 + angulo2 + angulo3) != 180)</span>
+<span class="fc" id="L87">      return false;</span>
+
+<span class="fc" id="L89">    return true;</span>
+  }
+
+  @Override
+  public boolean ehTrianguloRetangulo(double lado1, double lado2, double lado3) {
+<span class="fc" id="L94">    double[] lados = new double[] { lado1, lado2, lado3 };</span>
+
+<span class="fc" id="L96">    double hipotenusa = Math.max(lado1, lado2);</span>
+<span class="fc" id="L97">    hipotenusa = Math.max(lado3, hipotenusa);</span>
+
+<span class="fc" id="L99">    double somaQuadrada = 0;</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">    for (double lado : lados) {</span>
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">      if (lado != hipotenusa) {</span>
+<span class="nc" id="L102">        somaQuadrada += (lado * lado);</span>
+      }
+    }
+
+<span class="fc bfc" id="L106" title="All 2 branches covered.">    if (somaQuadrada != (hipotenusa * hipotenusa))</span>
+<span class="fc" id="L107">      return false;</span>
+
+<span class="fc" id="L109">    return true;</span>
+  }
+
+  @Override
+  public String classificaTriangulo(double angulo1, double angulo2, double angulo3) {
+<span class="fc bfc" id="L114" title="All 2 branches covered.">    if (!ehTriangulo(angulo1, angulo2, angulo3))</span>
+<span class="fc" id="L115">      return null;</span>
+
+<span class="pc bpc" id="L117" title="2 of 6 branches missed.">    boolean retangulo = (angulo1 == 90) || (angulo2 == 90) || (angulo3 == 90);</span>
+
+<span class="fc bfc" id="L119" title="All 2 branches covered.">    if (retangulo)</span>
+<span class="fc" id="L120">      return &quot;Retangulo&quot;;</span>
+
+<span class="pc bpc" id="L122" title="2 of 6 branches missed.">    boolean acutangulo = (angulo1 &lt; 90) &amp;&amp; (angulo2 &lt; 90) &amp;&amp; (angulo3 &lt; 90);</span>
+
+<span class="fc bfc" id="L124" title="All 2 branches covered.">    if (acutangulo)</span>
+<span class="fc" id="L125">      return &quot;Acutangulo&quot;;</span>
+
+<span class="pc bpc" id="L127" title="5 of 6 branches missed.">    boolean obtusangulo = (angulo1 &gt; 90) || (angulo2 &gt; 90) || (angulo3 &gt; 90);</span>
+
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">    if (obtusangulo)</span>
+<span class="fc" id="L130">      return &quot;Obtusângulo&quot;;</span>
+
+<span class="nc" id="L132">    return null;</span>
+  }
+
+  @Override
+  public double perimetroRetangulo(double lado1, double lado2) {
+<span class="fc" id="L137">    double perimetro = 2 * (lado1 + lado2);</span>
+<span class="fc" id="L138">    return perimetro;</span>
+  }
+
+  @Override
+  public double areaRetangulo(double lado1, double lado2) {
+<span class="fc" id="L143">    double area = lado1 * lado2;</span>
+<span class="fc" id="L144">    return area;</span>
+  }
+
+  @Override
+  public String calculadora(String expressao) {
+<span class="fc" id="L149">    String expressaoSemEspaco = expressao.replaceAll(&quot;\\s+&quot;, &quot;&quot;);</span>
+    double valor1;
+    double valor2;
+
+<span class="pc bpc" id="L153" title="1 of 2 branches missed.">    if (expressaoSemEspaco.contains(&quot;**&quot;)) {</span>
+<span class="nc" id="L154">      double[] valores = formatarValor(expressaoSemEspaco, &quot;\\*\\*&quot;);</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">      if (valores == null) {</span>
+<span class="nc" id="L156">        return &quot;Expressão inválida&quot;;</span>
+      }
+<span class="nc" id="L158">      valor1 = valores[0];</span>
+<span class="nc" id="L159">      valor2 = valores[1];</span>
+<span class="nc" id="L160">      return String.valueOf(Math.pow(valor1, valor2));</span>
+    }
+
+<span class="fc bfc" id="L163" title="All 2 branches covered.">    if (expressaoSemEspaco.contains(&quot;+&quot;)) {</span>
+<span class="fc" id="L164">      double[] valores = formatarValor(expressaoSemEspaco, &quot;\\+&quot;);</span>
+<span class="pc bpc" id="L165" title="1 of 2 branches missed.">      if (valores == null) {</span>
+<span class="nc" id="L166">        return &quot;Expressão inválida&quot;;</span>
+      }
+<span class="fc" id="L168">      valor1 = valores[0];</span>
+<span class="fc" id="L169">      valor2 = valores[1];</span>
+<span class="fc" id="L170">      return String.valueOf(valor1 + valor2);</span>
+    }
+
+<span class="pc bpc" id="L173" title="1 of 2 branches missed.">    if (expressaoSemEspaco.contains(&quot;-&quot;)) {</span>
+<span class="fc" id="L174">      double[] valores = formatarValor(expressaoSemEspaco, &quot;\\-&quot;);</span>
+<span class="fc bfc" id="L175" title="All 2 branches covered.">      if (valores == null) {</span>
+<span class="fc" id="L176">        return &quot;Expressão inválida&quot;;</span>
+      }
+<span class="fc" id="L178">      valor1 = valores[0];</span>
+<span class="fc" id="L179">      valor2 = valores[1];</span>
+<span class="fc" id="L180">      return String.valueOf(valor1 - valor2);</span>
+    }
+
+<span class="nc bnc" id="L183" title="All 2 branches missed.">    if (expressaoSemEspaco.contains(&quot;/&quot;)) {</span>
+<span class="nc" id="L184">      double[] valores = formatarValor(expressaoSemEspaco, &quot;/&quot;);</span>
+<span class="nc bnc" id="L185" title="All 2 branches missed.">      if (valores == null) {</span>
+<span class="nc" id="L186">        return &quot;Expressão inválida&quot;;</span>
+      }
+<span class="nc" id="L188">      valor1 = valores[0];</span>
+<span class="nc" id="L189">      valor2 = valores[1];</span>
+
+<span class="nc bnc" id="L191" title="All 2 branches missed.">      if (valor2 == 0) {</span>
+<span class="nc" id="L192">        return &quot;O divisor não pode ser zero&quot;;</span>
+      }
+<span class="nc" id="L194">      return String.valueOf(valor1 / valor2);</span>
+    }
+
+<span class="nc bnc" id="L197" title="All 2 branches missed.">    if (expressaoSemEspaco.contains(&quot;*&quot;)) {</span>
+<span class="nc" id="L198">      double[] valores = formatarValor(expressaoSemEspaco, &quot;\\*&quot;);</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">      if (valores == null) {</span>
+<span class="nc" id="L200">        return &quot;Expressão inválida&quot;;</span>
+      }
+<span class="nc" id="L202">      valor1 = valores[0];</span>
+<span class="nc" id="L203">      valor2 = valores[1];</span>
+<span class="nc" id="L204">      return String.valueOf(valor1 * valor2);</span>
+    }
+
+<span class="nc" id="L207">    return &quot;Operador é desconhecido ou não há operador&quot;;</span>
+  }
+
+  private double[] formatarValor(String expressao, String operador) {
+<span class="fc" id="L211">    String[] valoresSeparados = expressao.split(operador);</span>
+<span class="pc bpc" id="L212" title="1 of 2 branches missed.">    if (valoresSeparados.length != 2)</span>
+<span class="nc" id="L213">      return null;</span>
+<span class="fc" id="L214">    String valor1 = valoresSeparados[0];</span>
+<span class="fc" id="L215">    String valor2 = valoresSeparados[1];</span>
+
+<span class="pc bpc" id="L217" title="1 of 4 branches missed.">    if (!isInteger(valor1) || !isInteger(valor2))</span>
+<span class="fc" id="L218">      return null;</span>
+
+<span class="fc" id="L220">    return new double[] { Double.parseDouble(valor1), Double.parseDouble(valor2) };</span>
+  }
+
+  private boolean isInteger(String str) {
+<span class="pc bpc" id="L224" title="1 of 4 branches missed.">    return str != null &amp;&amp; str.matches(&quot;[0-9]*&quot;);</span>
+  }
+
+  @Override
+  public double areaCirculo(double raio) {
+<span class="fc" id="L229">    double area = Math.PI * Math.pow(raio, 2);</span>
+<span class="fc" id="L230">    return area;</span>
+  }
+
+  @Override
+  public double perimetroCirculo(double raio) {
+<span class="fc" id="L235">    double perimetro = 2 * Math.PI * raio;</span>
+<span class="fc" id="L236">    return perimetro;</span>
+  }
+
+  @Override
+  public double distanciaEntreDoisPontos(double x1, double y1, double x2, double y2) {
+<span class="fc" id="L241">    double distancia = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));</span>
+<span class="fc" id="L242">    return distancia;</span>
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span>TesteFuncionalidades (Dec 21, 2022 10:39:38 AM)</div></body></html>
